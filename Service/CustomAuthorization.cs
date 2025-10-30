@@ -19,14 +19,12 @@ namespace StudentListAPI.Service
             if (context.Response.StatusCode == StatusCodes.Status403Forbidden)
             {
                 context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(JsonSerializer.Serialize(new ErrorResponse() { ErrorCode = 403, Error = "Permission denied for this resource" }));
-                //await context.Response.WriteAsync("{\"error\": \"Access denied: You do not have permission to perform this action.\"}");
+                await context.Response.WriteAsync(JsonSerializer.Serialize(new ErrorResponse() { ErrorCode = 403, Error = "Not authorized to perform this action" }));
             }
             else if (context.Response.StatusCode == StatusCodes.Status401Unauthorized)
             {
                 context.Response.ContentType = "application/json";
                 await context.Response.WriteAsync(JsonSerializer.Serialize(new ErrorResponse() {ErrorCode=401, Error= "Please log in to access this resource" }));
-                //await context.Response.WriteAsync("{\"error\": \"Unauthorized: Please log in to access this resource.\"}");
             }
         }
     }

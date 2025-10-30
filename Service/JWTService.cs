@@ -20,11 +20,6 @@ namespace StudentListAPI.Service
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            //var claims = new[]
-            //{
-            //    new Claim(JwtRegisteredClaimNames.Sub, username),
-            //    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            //};
             var claims = new List<Claim>()
             {
                 new Claim(JwtRegisteredClaimNames.Sub, username),

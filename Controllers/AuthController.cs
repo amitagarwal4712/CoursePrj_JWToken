@@ -20,6 +20,7 @@ namespace StudentListAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Model.LoginRequest request)
         {
+            var s = Utility.PrepareHashfor128Bit(request.Password);
             // Validating user details
             var user = await ValidateUserAsync(request.UserName, request.Password);
 
