@@ -28,7 +28,7 @@ namespace StudentListAPI.Controllers
             if (user == null)
                 return Unauthorized("Invalid username or password.");
 
-            var token = _jwtService.GenerateToken(request.UserName, "Admin");
+            var token = _jwtService.GenerateToken(request.UserName, request.UserName.Equals("admin") ? "Admin" : "User");
             return Ok(new LoginResponse() { token = token });
         }
 
