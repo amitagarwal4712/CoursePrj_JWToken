@@ -2,9 +2,10 @@
 {
     public class UserResponse
     {
-        public int userid { get; set; }
-        public required string username { get; set; }
-        public required string usersecret { get; set; }
-        public bool isACtive { get; set; }
+        public int UserId { get; set; }
+        public required string UserName { get; set; }
+        public required string UserSecret { get; set; }
+        public required string UserRole { get; set; }
+        public bool isActive { get; set; }
     }
 }

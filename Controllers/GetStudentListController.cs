@@ -13,7 +13,7 @@ namespace StudentListAPI.Controllers
     public class GetStudentListController : ControllerBase
     {
 
-        [Authorize(Roles = " User")]
+        [Authorize(Roles = "Admin, Student, User")]
         [HttpGet("StudentList")]
         public async Task<IActionResult> GetStudentList()
         {
@@ -21,13 +21,14 @@ namespace StudentListAPI.Controllers
             return Ok(studentList);
         }
 
-        [Authorize(Roles = "User")]
-        [HttpPost]
-        public IActionResult AddStudent()
+        [Authorize(Roles = "Admin, Student")]
+        [HttpPost("AddStudent")]
+        public async Task<IActionResult> AddStudent(StudentModel request)
         {
-            
+            var message = InsertStudent(request);
 
-            return Ok(new { message = "You are authorized!" });
+            var studentList = await StudentListAsync();
+            return Ok(studentList);
         }
 
 
@@ -40,6 +41,18 @@ namespace StudentListAPI.Controllers
 
                    
             return studentList.AsList();
+        }
+
+        private string InsertStudent(StudentModel request)
+        {
+            string connectionString = Environment.GetEnvironmentVariable("SQLServerConnectionString");
+
+            using var connection = new SqlConnection(connectionString);
+            var studentList = connection.Execute("INSERT INTO [STUDENTS] ([FirstName],[MiddleName],[LastName],[EmailAddress],[PhoneNumber]) VALUES (@FirstName,@MiddleName,@LastName,@EmailAddress,@PhoneNumber)"
+                    , new { request.FirstName, request.MiddleName, request.LastName, request.EmailAddress, request.PhoneNumber });
+
+
+            return studentList > 0 ? "Student Added Successfully" : "Issue in adding student record.";
         }
 
     }

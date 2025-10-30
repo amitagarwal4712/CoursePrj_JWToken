@@ -20,15 +20,13 @@ namespace StudentListAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Model.LoginRequest request)
         {
-            var s = Utility.PrepareHashfor128Bit(request.Password);
-
             // Validating user details
             var user = await ValidateUserAsync(request.UserName, request.Password);
 
             if (user == null)
-                return Unauthorized("Invalid username or password.");
+                return Ok(new ErrorResponse() { ErrorCode = 401 , Error = "Invalid username or password."});
 
-            var token = _jwtService.GenerateToken(request.UserName, request.UserName.Equals("admin") ? "Admin" : "User");
+            var token = _jwtService.GenerateToken(request.UserName, user.UserRole);
             return Ok(new LoginResponse() { token = token });
         }
 
@@ -37,13 +35,13 @@ namespace StudentListAPI.Controllers
             string connectionString = Environment.GetEnvironmentVariable("SQLServerConnectionString");
 
             using var connection = new SqlConnection(connectionString);
-            var user = await connection.QuerySingleOrDefaultAsync<UserResponse>("SELECT username, usersecret, case isactive when 'Y' then 'true' else 'false' end as isactive FROM [user] WHERE username = @Username", new { Username = username });
+            var user = await connection.QuerySingleOrDefaultAsync<UserResponse>("SELECT UserName, UserSecret,UserRole, case isactive when 'Y' then 'true' else 'false' end as isactive FROM [users] WHERE username = @Username", new { Username = username });
 
             if (user == null)
                 return null;
 
             // Verifying after hashing user input password with DB stored hashed password
-            bool valid = string.Equals(Utility.PrepareHashfor128Bit(password).ToString(), user.usersecret);
+            bool valid = string.Equals(Utility.PrepareHashfor128Bit(password).ToString(), user.UserSecret);
             return valid ? user : null;
         }
     }
