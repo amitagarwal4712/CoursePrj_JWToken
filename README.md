@@ -1,4 +1,5 @@
 # Course Project Fall 2025- ITIS6200- Implementing a Concept or Security Protocol
+# Topic: Implementation of JWT token with REST API
 ## 🛠️ Technologies
 - REST API with C#
 - SQL Server
