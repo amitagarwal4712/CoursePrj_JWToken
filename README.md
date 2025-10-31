@@ -29,6 +29,7 @@ It validates the provided username and password against the database and issues 
   "UserName": "john.doe",
   "Password": "MySecurePassword123"
 }
+```
 ✅ Successful Response
 
 When valid credentials are provided, the API returns a JWT token that can be used to authenticate future requests.
@@ -121,19 +122,19 @@ Authorization: Bearer <your-jwt-token>
     "PhoneNumber": "8989898966"
   }
 ]
-📘 2. Add New Student
-Request
+```
+## 📘 2. Add New Student
+### **Request**
 
-Method: POST
-URL: /AddStudent
-Headers:
-
+**Method:** `POST`  
+**URL:** `/AddStudent`  
+**Headers:**  
 Authorization: Bearer <your-jwt-token>
+
 Content-Type: application/json
 
-
 Body Example:
-
+```json
 {
     "StudentId": 3,
     "FirstName": "Niami",
@@ -142,13 +143,12 @@ Body Example:
     "EmailAddress": "Campbell@test.com",
     "PhoneNumber": "7878787878"
 }
-
-Successful Response
-
+````
+### **Successful Response**
 Returns the updated list of students after adding the new record.
 
-Status: 200 OK
-
+**Status:** `200 OK`
+```json
 [
  {
     "StudentId": 1,
@@ -175,32 +175,30 @@ Status: 200 OK
     "PhoneNumber": "7878787878"
   }
 ]
+```
+## 📘 3. Delete Student
+### **Request**
 
-📘 3. Delete Student
-Request
-
-Method: POST
-URL: /DeleteStudent
-Headers:
-
+**Method:** `POST`  
+**URL:** `/DeleteStudent`  
+**Headers:**  
 Authorization: Bearer <your-jwt-token>
+
 Content-Type: application/json
 
-
 Body Example:
-
+```json
 {
   "studentId": 3
 }
-
-Successful Response
-
+````
+### **Successful Response**
 Returns the updated list of students after deletion.
 
-Status: 200 OK
-
+**Status:** `200 OK`
+```json
 [
-  {{
+  {
     "StudentId": 1,
     "FirstName": "David",
     "MiddleName": "J",
@@ -217,3 +215,4 @@ Status: 200 OK
     "PhoneNumber": "8989898966"
   }
 ]
+```
