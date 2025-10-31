@@ -39,7 +39,7 @@ namespace StudentListAPI.Service
                 issuer: jwtSettings["Issuer"],
                 audience: jwtSettings["Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(double.Parse(jwtSettings["ExpireMinutes"])),
+                expires: DateTime.Now.AddMinutes(double.Parse(jwtSettings["ExpireMinutes"])),
                 signingCredentials: creds
             );
             return new JwtSecurityTokenHandler().WriteToken(token);
