@@ -54,3 +54,152 @@ Example Response
   "Error": "Invalid username or password."
 }
 
+
+
+
+
+# 🎓 Student Management API - JWT & Role-Based Authorization
+
+This API provides secure endpoints to **retrieve**, **add**, and **delete** students from the system.  
+Access is protected using **JWT authentication** and **role-based authorization**, ensuring only users with specific roles can perform certain actions.
+
+---
+
+## 🔐 Authentication & Authorization
+
+All endpoints require a valid **JWT token** in the `Authorization` header.  
+Each route also enforces **role-based access** using the `[Authorize(Roles = "...")]` attribute.
+
+### Possible Authorization Responses
+
+| Status | Condition | Response Example |
+|---------|------------|------------------|
+| `401 Unauthorized` | Missing or invalid JWT token | `{ "Error": "Please log in to access this resource" }` |
+| `403 Forbidden` | Authenticated but insufficient role permissions | `{ "Error": "Not authorized to perform this action" }` |
+
+---
+
+## 🧾 Endpoints Summary
+
+| Endpoint | Method | Roles Allowed | Description |
+|-----------|---------|----------------|--------------|
+| `/StudentList` | `GET` | `Admin, Student, User` | Retrieve a list of all students. |
+| `/AddStudent` | `POST` | `Admin, User` | Add a new student record and return the updated list. |
+| `/DeleteStudent` | `POST` | `Admin, User` | Delete an existing student record and return the updated list. |
+
+---
+
+## 📘 1. Get All Students
+
+### **Request**
+
+**Method:** `GET`  
+**URL:** `/StudentList`  
+**Headers:**  
+Authorization: Bearer <your-jwt-token>
+
+### **Successful Response**
+
+**Status:** `200 OK`
+
+```json
+[
+  {
+    "StudentId": 1,
+    "Name": "John Doe",
+    "Age": 22,
+    "Course": "Computer Science"
+  },
+  {
+    "StudentId": 2,
+    "Name": "Jane Smith",
+    "Age": 21,
+    "Course": "Mathematics"
+  }
+]
+📘 2. Add New Student
+Request
+
+Method: POST
+URL: /AddStudent
+Headers:
+
+Authorization: Bearer <your-jwt-token>
+Content-Type: application/json
+
+
+Body Example:
+
+{
+  "StudentId": 3,
+  "Name": "Alice Johnson",
+  "Age": 20,
+  "Course": "Physics"
+}
+
+Successful Response
+
+Returns the updated list of students after adding the new record.
+
+Status: 200 OK
+
+[
+  {
+    "StudentId": 1,
+    "Name": "John Doe",
+    "Age": 22,
+    "Course": "Computer Science"
+  },
+  {
+    "StudentId": 2,
+    "Name": "Jane Smith",
+    "Age": 21,
+    "Course": "Mathematics"
+  },
+  {
+    "StudentId": 3,
+    "Name": "Alice Johnson",
+    "Age": 20,
+    "Course": "Physics"
+  }
+]
+
+📘 3. Delete Student
+Request
+
+Method: POST
+URL: /DeleteStudent
+Headers:
+
+Authorization: Bearer <your-jwt-token>
+Content-Type: application/json
+
+
+Body Example:
+
+{
+  "studentId": 3
+}
+
+Successful Response
+
+Returns the updated list of students after deletion.
+
+Status: 200 OK
+
+[
+  {
+    "StudentId": 1,
+    "Name": "John Doe",
+    "Age": 22,
+    "Course": "Computer Science"
+  },
+  {
+    "StudentId": 2,
+    "Name": "Jane Smith",
+    "Age": 21,
+    "Course": "Mathematics"
+  }
+]
+
+⚙️ Implementation Details
