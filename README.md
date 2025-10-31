@@ -1,3 +1,19 @@
+# Course Project Fall 2025- ITIS6200- Implementing a Concept or Security Protocol
+## 🛠️ Technologies
+- REST API with C#
+- SQL Server
+- SQL Server Management Studio 21
+- MS Visual Studio 2022
+- Database Refer DB script table.sql into codebase
+
+## 🧰 Installation
+Install dependencies:
+- dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+- dotnet add package System.IdentityModel.Tokens.Jwt
+- dotnet add package Microsoft.Sql.SqlClient
+- dotnet add package dapper
+
+## 🚀 REST API Details
 # 🔐 Login API - JWT Authentication
 
 This API endpoint handles user authentication and returns a **JWT token** upon successful login.  
