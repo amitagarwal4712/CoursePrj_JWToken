@@ -7,7 +7,7 @@ It validates the provided username and password against the database and issues 
 
 ## 📘 Endpoint Summary
 
-**URL:** `/login`  
+**URL:** `/api/auth/login`  
 **Method:** `POST`  
 **Authorization:** ❌ Not required (this is the authentication endpoint)  
 **Response Type:** `application/json`
@@ -95,7 +95,7 @@ Each route also enforces **role-based access** using the `[Authorize(Roles = "..
 ### **Request**
 
 **Method:** `GET`  
-**URL:** `/StudentList`  
+**URL:** `/Student/StudentList`  
 **Headers:**  
 Authorization: Bearer <your-jwt-token>
 
@@ -127,7 +127,7 @@ Authorization: Bearer <your-jwt-token>
 ### **Request**
 
 **Method:** `POST`  
-**URL:** `/AddStudent`  
+**URL:** `/Student/AddStudent`  
 **Headers:**  
 Authorization: Bearer <your-jwt-token>
 
@@ -180,7 +180,7 @@ Returns the updated list of students after adding the new record.
 ### **Request**
 
 **Method:** `POST`  
-**URL:** `/DeleteStudent`  
+**URL:** `/Student/DeleteStudent`  
 **Headers:**  
 Authorization: Bearer <your-jwt-token>
 
