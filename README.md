@@ -106,15 +106,19 @@ Authorization: Bearer <your-jwt-token>
 [
   {
     "StudentId": 1,
-    "Name": "John Doe",
-    "Age": 22,
-    "Course": "Computer Science"
+    "FirstName": "David",
+    "MiddleName": "J",
+    "LastName": "Wheeler",
+    "EmailAddress": "d@test.com",
+    "PhoneNumber": "24524524566"
   },
   {
     "StudentId": 2,
-    "Name": "Jane Smith",
-    "Age": 21,
-    "Course": "Mathematics"
+    "FirstName": "Peter",
+    "MiddleName": "J",
+    "LastName": "Fransis",
+    "EmailAddress": "pFransis@test.com",
+    "PhoneNumber": "8989898966"
   }
 ]
 📘 2. Add New Student
@@ -131,10 +135,12 @@ Content-Type: application/json
 Body Example:
 
 {
-  "StudentId": 3,
-  "Name": "Alice Johnson",
-  "Age": 20,
-  "Course": "Physics"
+    "StudentId": 3,
+    "FirstName": "Niami",
+    "MiddleName": "J",
+    "LastName": "Campbell",
+    "EmailAddress": "Campbell@test.com",
+    "PhoneNumber": "7878787878"
 }
 
 Successful Response
@@ -144,23 +150,29 @@ Returns the updated list of students after adding the new record.
 Status: 200 OK
 
 [
-  {
+ {
     "StudentId": 1,
-    "Name": "John Doe",
-    "Age": 22,
-    "Course": "Computer Science"
+    "FirstName": "David",
+    "MiddleName": "J",
+    "LastName": "Wheeler",
+    "EmailAddress": "d@test.com",
+    "PhoneNumber": "24524524566"
   },
   {
     "StudentId": 2,
-    "Name": "Jane Smith",
-    "Age": 21,
-    "Course": "Mathematics"
-  },
+    "FirstName": "Peter",
+    "MiddleName": "J",
+    "LastName": "Fransis",
+    "EmailAddress": "pFransis@test.com",
+    "PhoneNumber": "8989898966"
+  }
   {
     "StudentId": 3,
-    "Name": "Alice Johnson",
-    "Age": 20,
-    "Course": "Physics"
+    "FirstName": "Niami",
+    "MiddleName": "J",
+    "LastName": "Campbell",
+    "EmailAddress": "Campbell@test.com",
+    "PhoneNumber": "7878787878"
   }
 ]
 
@@ -188,18 +200,20 @@ Returns the updated list of students after deletion.
 Status: 200 OK
 
 [
-  {
+  {{
     "StudentId": 1,
-    "Name": "John Doe",
-    "Age": 22,
-    "Course": "Computer Science"
+    "FirstName": "David",
+    "MiddleName": "J",
+    "LastName": "Wheeler",
+    "EmailAddress": "d@test.com",
+    "PhoneNumber": "24524524566"
   },
   {
     "StudentId": 2,
-    "Name": "Jane Smith",
-    "Age": 21,
-    "Course": "Mathematics"
+    "FirstName": "Peter",
+    "MiddleName": "J",
+    "LastName": "Fransis",
+    "EmailAddress": "pFransis@test.com",
+    "PhoneNumber": "8989898966"
   }
 ]
-
-⚙️ Implementation Details
