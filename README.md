@@ -43,8 +43,8 @@ It validates the provided username and password against the database and issues 
 ### Example Request
 ```json
 {
-  "UserName": "john.doe",
-  "Password": "MySecurePassword123"
+  "UserName": "david",
+  "Password": "passwordxyz"
 }
 ```
 ✅ Successful Response
