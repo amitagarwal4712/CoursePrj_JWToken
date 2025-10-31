@@ -1,5 +1,6 @@
 ﻿namespace StudentListAPI.Model
 {
+    //used to perform get student list for add/delete/view student list
     public class StudentModel
     {
         public int StudentId { get; set; }

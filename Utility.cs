@@ -6,7 +6,7 @@ namespace StudentListAPI
     public static class Utility
     {
 
-        public static string PrepareHashfor128Bit(string stringToHash)
+        public static string GenerateHashfor128Bit(string stringToHash)
         {
             // Convert input string to bytes
             byte[] data = Encoding.UTF8.GetBytes(stringToHash);

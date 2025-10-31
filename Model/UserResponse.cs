@@ -1,5 +1,6 @@
 ﻿namespace StudentListAPI.Model
 {
+    //For user related details
     public class UserResponse
     {
         public int UserId { get; set; }
