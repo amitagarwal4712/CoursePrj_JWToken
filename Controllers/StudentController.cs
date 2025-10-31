@@ -10,7 +10,7 @@ namespace StudentListAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class GetStudentListController : ControllerBase
+    public class StudentController : ControllerBase
     {
 
         [Authorize(Roles = "Admin, Student, User")]
@@ -21,7 +21,7 @@ namespace StudentListAPI.Controllers
             return Ok(studentList);
         }
 
-        [Authorize(Roles = "Admin, Student")]
+        [Authorize(Roles = "Admin, User")]
         [HttpPost("AddStudent")]
         public async Task<IActionResult> AddStudent(StudentModel request)
         {
@@ -31,13 +31,22 @@ namespace StudentListAPI.Controllers
             return Ok(studentList);
         }
 
+        [Authorize(Roles = "Admin, User")]
+        [HttpPost("DeleteStudent")]
+        public async Task<IActionResult> DeleteStudent(int studentId)
+        {
+            var message = DeleteStudentData(studentId);
+
+            var studentList = await StudentListAsync();
+            return Ok(studentList);
+        }
 
         private async Task<List<StudentModel>?> StudentListAsync()
         {
             string connectionString = Environment.GetEnvironmentVariable("SQLServerConnectionString");
 
             using var connection = new SqlConnection(connectionString);
-            var studentList = await connection.QueryAsync<StudentModel>("SELECT [FirstName],[MiddleName],[LastName],[EmailAddress],[PhoneNumber] FROM [students]");
+            var studentList = await connection.QueryAsync<StudentModel>("SELECT [StudentId],[FirstName],[MiddleName],[LastName],[EmailAddress],[PhoneNumber] FROM [students]");
 
                    
             return studentList.AsList();
@@ -53,6 +62,18 @@ namespace StudentListAPI.Controllers
 
 
             return studentList > 0 ? "Student Added Successfully" : "Issue in adding student record.";
+        }
+
+        private string DeleteStudentData(int StudentID)
+        {
+            string connectionString = Environment.GetEnvironmentVariable("SQLServerConnectionString");
+
+            using var connection = new SqlConnection(connectionString);
+            var studentList = connection.Execute("DELETE FROM [STUDENTS] WHERE StudentId = @StudentId"
+                    , new { StudentID });
+
+
+            return studentList > 0 ? "Student Deleted Successfully" : "Issue in Deleteing student record.";
         }
 
     }
